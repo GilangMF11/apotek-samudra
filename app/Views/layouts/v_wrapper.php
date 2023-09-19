@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard 3</title>
+  <title>Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url()?>template/dist/css/adminlte.min.css">
+  <link rel="icon" href="<?= base_url() ?>template/dist/img/logo.jpg" class="rounded-favicon">
 </head>
 <!--
 `body` tag options:
@@ -56,3 +57,9 @@
 <script src="<?php echo base_url()?>template/dist/js/pages/dashboard3.js"></script>
 </body>
 </html>
+
+<style>
+  .rounded-favicon{
+    border-radius: 50%;
+  }
+</style>
