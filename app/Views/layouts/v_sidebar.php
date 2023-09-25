@@ -52,30 +52,6 @@
               </li>
             </ul>
           </li>
-                        
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-notes-medical"></i>
-              <p>
-                Batch
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="./index.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Tambah Batch</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Data Batch</p>
-                </a>
-              </li>
-            </ul>
-          </li>
 
           <li class="nav-item">
             <a href="#" class="nav-link">
@@ -87,13 +63,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="<?php echo base_url(); ?>kategori/create" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tambah Kategori</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="<?php echo base_url(); ?>kategori" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Kategori</p>
                 </a>
@@ -103,7 +79,7 @@
                     
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-list"></i>
+              <i class="nav-icon fas fa-notes-medical"></i>
               <p>
                 Unit
                 <i class="right fas fa-angle-left"></i>
@@ -111,13 +87,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="<?php echo base_url(); ?>unit/create" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tambah Unit</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="<?php echo base_url(); ?>unit" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Unit</p>
                 </a>
@@ -206,13 +182,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./index.html" class="nav-link">
+                <a href="<?php echo base_url(); ?>user/create" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Tambah Pengguna</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./index2.html" class="nav-link">
+                <a href="<?php echo base_url(); ?>user" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data Pengguna</p>
                 </a>

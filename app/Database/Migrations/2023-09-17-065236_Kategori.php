@@ -8,7 +8,7 @@ class Kategori extends Migration
 {
     public function up()
     {
-        $this->forge->addfields([
+        $this->forge->addField([
             'id_kategori' => [
                 'type'           => 'INT',  
                 'constraint'     => 12,
@@ -19,7 +19,7 @@ class Kategori extends Migration
                 'constraint' => '50',
             ],
         ]);
-        $this->forge->addKey('id', true);
+        $this->forge->addKey('id_kategori', true);
         $this->forge->createTable('tbkategori');
     }
 

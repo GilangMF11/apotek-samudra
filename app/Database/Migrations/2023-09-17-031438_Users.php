@@ -28,11 +28,11 @@ class Users extends Migration
             ]
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->createTable('user');
+        $this->forge->createTable('users');
     }
 
     public function down()
     {
-        this->forge->dropTable('users');
+        $this->forge->dropTable('users');
     }
 }

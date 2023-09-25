@@ -19,7 +19,7 @@ class Unit extends Migration
                 'constraint' => '50',
             ]
         ]);
-        $this->forge->addKey('id', true);
+        $this->forge->addKey('id_unit', true);
         $this->forge->createTable('tbunit');
     }
 

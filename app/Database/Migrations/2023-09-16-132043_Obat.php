@@ -17,9 +17,16 @@ class Obat extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '50',
             ],
-            'kdbatch' => [
-                'type' => 'VARCHAR',
-                'constraint' => '12',
+            'kdbatch'=> [
+                'type'       => 'VARCHAR',
+                'constraint' => '50',
+            ],
+            'tglproduksi'=> [
+                'type'       => 'DATE',
+                'null' => true,
+            ],
+            'tglexp' => [
+                'type'       => 'DATE',
             ],
             'rak' => [
                 'type' => 'VARCHAR',
@@ -56,6 +63,6 @@ class Obat extends Migration
 
     public function down()
     {
-        this->forge->dropTable('tbobat');
+        $this->forge->dropTable('tbobat');
     }
 }

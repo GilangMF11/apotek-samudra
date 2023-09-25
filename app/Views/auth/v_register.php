@@ -22,9 +22,9 @@
       <img src="<?= base_url()?>template/dist/img/logo.png" alt="" width="300" hight="300">
     </div>
     <div class="card-body">
-      <p class="login-box-msg">Silahkan Login!</p>
+      <p class="login-box-msg">Silahkan Register</p>
 
-      <form action="<?= base_url()?>login" method="POST">
+      <form action="register" method="POST">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Username" id="username" name="username">
           <div class="input-group-append">
@@ -41,8 +41,30 @@
             </div>
           </div>
         </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Password" id="password" name="confirm_password">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+    <select class="form-control" name="role">
+        <option class="text-center">--Hak Akses--</option>
+        <option value="admin">Admin</option>
+        <option value="kasir">Kasir</option>
+        <!-- Tambahkan role lain jika diperlukan -->
+    </select>
+    <div class="input-group-append">
+        <div class="input-group-text">
+            <span class="fas fa-user"></span>
+        </div>
+    </div>
+</div>
 
-        <button type="submit" class="btn btn-secondary btn-block">Login</button>
+
+        <button type="submit" class="btn btn-secondary btn-block">Register</button>
 
       </form>
 
