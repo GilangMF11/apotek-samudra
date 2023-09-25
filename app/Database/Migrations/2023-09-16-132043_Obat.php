@@ -12,6 +12,7 @@ class Obat extends Migration
             'kdobat' => [
                 'type'           => 'VARCHAR',
                 'constraint'     => 12,
+                'auto_increment' => true
             ],
             'nmobat' => [
                 'type'       => 'VARCHAR',
@@ -43,6 +44,10 @@ class Obat extends Migration
             'deskripsi' => [
                 'type' => 'TEXT',
                 'null' => true,
+            ],
+            'qty' => [
+                'type' => 'INTEGER',
+                'constraint' => '12'
             ],
             'hrgbeli' => [
                 'type' => 'DOUBLE',

@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Tambah Unit</h1>
+            <h1>Tambah Penyimpanan</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Unit</a></li>
-              <li class="breadcrumb-item active">Tambah Unit</li>
+              <li class="breadcrumb-item"><a href="#">Penyimpanan</a></li>
+              <li class="breadcrumb-item active">Tambah Penyimpanan</li>
             </ol>
           </div>
         </div>

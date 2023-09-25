@@ -9,7 +9,7 @@ class KategoriController extends BaseController
     public function index()
     {
         $kategoriModel = new \App\Models\KategoriModel();
-        $data['kategori'] = $kategoriModel->findAll();
+        $data['kategori'] = $kategoriModel->orderBy('nmkategori', 'ASC')->findAll();
         
         return view('backend/kategori/v_data_kategori', $data);
     }

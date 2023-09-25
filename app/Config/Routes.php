@@ -39,5 +39,26 @@ $routes->get('unit/edit/(:num)', 'UnitController::edit/$1');
 $routes->post('unit/update/(:num)', 'UnitController::update/$1');
 $routes->get('unit/delete/(:num)', 'UnitController::delete/$1');
 
+//rak
+$routes->get('rak', 'RakController::index');
+$routes->get('rak/create', 'RakController::create');
+$routes->post('rak/store', 'RakController::store');
+$routes->get('rak/edit/(:num)', 'RakController::edit/$1');
+$routes->post('rak/update/(:num)', 'RakController::update/$1');
+$routes->get('rak/delete/(:num)', 'RakController::delete/$1');
 
+//Pemasok
+$routes->get('supplier', 'SupplierController::index');
+$routes->get('supplier/create', 'SupplierController::create');
+$routes->post('supplier/store', 'SupplierController::store');
+$routes->get('supplier/edit/(:num)', 'SupplierController::edit/$1');
+$routes->post('supplier/update/(:num)', 'SupplierController::update/$1');
+$routes->get('supplier/delete/(:num)', 'SupplierController::delete/$1');
 
+//Obat
+$routes->get('obat', 'ObatController::index');
+$routes->get('obat/create', 'ObatController::create');
+$routes->post('obat/store', 'ObatController::store');
+$routes->get('obat/edit/(:num)', 'ObatController::edit/$1');
+$routes->post('obat/update/(:num)', 'ObatController::update/$1');
+$routes->get('obat/delete/(:num)', 'ObatController::delete/$1');

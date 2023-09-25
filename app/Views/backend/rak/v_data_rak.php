@@ -6,12 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Kategori</h1>
+            <h1>Data Penyimpanan</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Data Kategori</li>
+              <li class="breadcrumb-item active">Data Penyimpanan</li>
             </ol>
           </div>
         </div>
@@ -31,7 +31,7 @@
 
             <div class="card">
               <div class="card-header">
-                <a href="penyimpanan/create"><button class="btn btn-primary" >Tambah Data</button></a>
+                <a href="rak/create"><button class="btn btn-primary" >Tambah Data</button></a>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -45,7 +45,7 @@
                     </thead>
                     <tbody>
                         <?php $counter = 1; // Inisialisasi counter ?>
-                        <?php foreach($kategori as $u) : ?>
+                        <?php foreach($rak as $u) : ?>
                             <tr>
                                 <td><?= $counter++ ?></td>
                                 <td><?= $u['nmrak'] ?></td>
