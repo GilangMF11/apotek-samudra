@@ -15,17 +15,17 @@ class UserSeeder extends Seeder
         $users = [
             [
                 'username' => 'admin',
-                'password' => password_hash('admin123', PASSWORD_DEFAULT),
+                'password' => password_hash('admin123', PASSWORD_BCRYPT),
                 'role' => 'admin'
             ],
             [
                 'username' => 'kasir',
-                'password' => password_hash('kasir123', PASSWORD_DEFAULT),
+                'password' => password_hash('kasir123', PASSWORD_BCRYPT),
                 'role' => 'kasir'
             ],
             [
                 'username' => 'apotekter',
-                'password' => password_hash('apotekter123', PASSWORD_DEFAULT),
+                'password' => password_hash('apotekter123', PASSWORD_BCRYPT),
                 'role' => 'apotekter'
             ]
         ];

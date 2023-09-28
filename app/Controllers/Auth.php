@@ -21,32 +21,41 @@ class Auth extends BaseController
 
     public function login()
     {
-        $data = []; // Inisialisasi variabel data
+        // Validasi form login
+        $validation = \Config\Services::validation();
+        $validationRules = [
+            'username' => 'required',
+            'password' => 'required'
+        ];
 
-        if ($this->request->getMethod() === 'post') {
-            $username = $this->request->getPost('username');
-            $password = $this->request->getPost('password');
-
-            // Lakukan validasi pengguna di sini, misalnya dengan model User
-            $userModel = new UserModel();
-            $user = $userModel->where('username', $username)->first();
-
-            if ($user && password_verify($password, $user['password'])) {
-                // Jika autentikasi berhasil, simpan informasi pengguna ke sesi
-                $userData = [
-                    'id' => $user['id'],
-                    'username' => $user['username'],
-                    'role' => $user['role']
-                ];
-
-                session()->set($userData);
-
-                return redirect()->to('/dashboard'); // Ganti dengan halaman yang sesuai setelah login berhasil
-            } else {
-                // Jika autentikasi gagal, tampilkan pesan error
-                $data['error'] = 'Login failed. Please check your username and password.';
-            }
+        if (!$this->validate($validationRules)) {
+            // Jika validasi gagal, kembalikan ke halaman login dengan pesan error
+            return view('auth/v_login', ['validation' => $validation]);
         }
+
+        // Ambil input username dan password dari form
+        $username = $this->request->getPost('username');
+        $password = $this->request->getPost('password');
+
+        // Cari user berdasarkan username
+        $user = $this->userModel->where('username', $username)->first();
+
+        if ($user) {
+            // Jika user ditemukan, verifikasi password
+            if (password_verify($password, $user['password'])) {
+                // Jika password benar, login berhasil
+                // Set session atau token auth sesuai kebutuhan
+                // Redirect ke halaman dashboard atau halaman setelah login sukses
+                return redirect()->to('/dashboard');
+            } else {
+                // Jika password salah, kembalikan ke halaman login dengan pesan error
+                return view('auth/v_login', ['validation' => $validation, 'error' => 'Password salah']);
+            }
+        } else {
+            // Jika user tidak ditemukan, kembalikan ke halaman login dengan pesan error
+            return view('auth/v_login', ['validation' => $validation, 'error' => 'Username tidak ditemukan']);
+        }
+    
     }
 
     public function register()
@@ -87,6 +96,6 @@ class Auth extends BaseController
     {
         // Implementasi logout di sini
         session()->destroy();
-        return redirect()->to('/login'); // Ganti dengan halaman login
+        return redirect()->to('/'); // Ganti dengan halaman login
     }
 }

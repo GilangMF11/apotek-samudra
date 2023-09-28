@@ -62,3 +62,6 @@ $routes->post('obat/store', 'ObatController::store');
 $routes->get('obat/edit/(:num)', 'ObatController::edit/$1');
 $routes->post('obat/update/(:num)', 'ObatController::update/$1');
 $routes->get('obat/delete/(:num)', 'ObatController::delete/$1');
+
+//
+$routes->get('transaksi/create', 'TransaksiController::create');

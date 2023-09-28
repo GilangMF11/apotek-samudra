@@ -57,18 +57,29 @@ class ObatController extends BaseController
         return redirect()->to('/obat')->with('message', 'rak created successfully.');
     }
     
-    public function edit($id)
+    public function edit($kdobat)
     {
         $obatModel = new \App\Models\ObatModel();
-        $data['obat'] = $obatModel->find($id);
+        $data['obat'] = $obatModel->find($kdobat);
+        // Load model untuk dropdown
+        $rakModel = new RakModel();
+        $unitModel = new UnitModel();
+        $kategoriModel = new KategoriModel();
+        $supplierModel = new SupplierModel();
+        
+        $data['rak'] = $rakModel->orderBy('nmrak', 'ASC')->findAll();
+        $data['unit'] = $unitModel->orderBy('nmunit', 'ASC')->findAll();
+        $data['kategori'] = $kategoriModel->orderBy('nmkategori', 'ASC')->findAll();
+        $data['supplier'] = $supplierModel->orderBy('nmsupplier', 'ASC')->findAll();
+
         
         return view('backend/obat/v_edit_obat', $data);
     }
     
-    public function update($id)
+    public function update($kdobat)
     {
         $obatModel = new \App\Models\ObatModel();
-        $obatModel->update($id, [
+        $obatModel->update($kdobat, [
             'nmobat' => $this->request->getPost('nmobat'),
             'kdbatch' => $this->request->getPost('kdbatch'),
             'tglproduksi' => $this->request->getPost('tglproduksi'),
@@ -87,10 +98,10 @@ class ObatController extends BaseController
         return redirect()->to('/obat')->with('message', 'Obat Updated successfully.');
     }
     
-    public function delete($id)
+    public function delete($kdobat)
     {
         $obatModel = new \App\Models\ObatModel();
-        $obatModel->delete($id);
+        $obatModel->delete($kdobat);
         
         return redirect()->to('/obat')->with('message', 'rak deleted successfully.');
     }

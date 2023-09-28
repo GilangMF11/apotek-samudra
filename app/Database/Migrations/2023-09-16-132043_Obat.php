@@ -12,7 +12,7 @@ class Obat extends Migration
             'kdobat' => [
                 'type'           => 'VARCHAR',
                 'constraint'     => 12,
-                'auto_increment' => true
+                'auto_increment' => true,
             ],
             'nmobat' => [
                 'type'       => 'VARCHAR',

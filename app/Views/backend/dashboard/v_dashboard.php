@@ -23,6 +23,12 @@
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
+
+      <?php if(isset($error)): ?>
+        <div class="alert alert-danger"><?= $error ?></div>
+        <?php endif; ?>
+
+
       <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -58,7 +64,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3 style="color: white;"><?= $total_users ?></h3>
+                <h3 style="color: white;"></h3>
 
                 <p>User Registrations</p>
               </div>
