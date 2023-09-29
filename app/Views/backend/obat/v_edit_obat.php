@@ -27,7 +27,7 @@
             <div class="card card-primary">
               <!-- /.card-header -->
               <!-- form start -->
-              <form action="<?= base_url('obat/update/'.$obat['kdobat']) ?> method="POST">
+              <form action="<?= base_url('obat/update/'.$obat['kdobat']) ?>" method="POST">
                 <div class="card-body">
                   <div class="form-group">
                     <label>Nama Obat</label>
