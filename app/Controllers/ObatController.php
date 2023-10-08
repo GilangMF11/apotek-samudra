@@ -14,7 +14,7 @@ class ObatController extends BaseController
     public function index()
     {
         $obatModel = new \App\Models\ObatModel();
-        $data['obat'] = $obatModel->findAll();
+        $data['obat'] = $obatModel->orderBy('nmobat', 'ASC')->findAll();
         
         return view('backend/obat/v_data_obat', $data);
     }
@@ -54,7 +54,7 @@ class ObatController extends BaseController
             'pemasok' => $this->request->getPost('pemasok'),
         ]);
         
-        return redirect()->to('/obat')->with('message', 'rak created successfully.');
+        return redirect()->to('/obat')->with('message', 'Obat Created Successfully.');
     }
     
     public function edit($kdobat)

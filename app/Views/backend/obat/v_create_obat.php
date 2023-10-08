@@ -30,9 +30,10 @@
               <!-- form start -->
               <form action="<?= base_url('obat/store') ?>" method="POST">
                 <div class="card-body">
+
                   <div class="form-group">
                     <label>Nama Obat</label>
-                    <input type="text" name="nmobat" class="form-control" id="InputKategori" placeholder="Unit Obat" required>
+                    <input type="text" name="nmobat" class="form-control" id="InputKategori" placeholder="Nama Obat" required>
                   </div>
 
                     <div class="form-group">

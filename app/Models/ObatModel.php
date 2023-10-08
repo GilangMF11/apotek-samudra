@@ -23,4 +23,8 @@ class ObatModel extends Model
         'hrgjual',
         'pemasok'
     ];
+    public function getLastKdobat()
+    {
+    return $this->selectMax('kdobat')->first();
+    }
 }

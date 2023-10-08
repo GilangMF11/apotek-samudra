@@ -10,6 +10,7 @@ $routes->get('dashboard', 'Home::index');
 // Rute untuk halaman login (tampilan form login)
 //$routes->get('login', 'Auth::login');
 $routes->post('login', 'Auth::login'); 
+$routes->get('logout', 'Auth::login');
 
 $routes->get('register', 'Auth::register');
 $routes->post('register', 'Auth::register');
@@ -63,5 +64,5 @@ $routes->get('obat/edit/(:num)', 'ObatController::edit/$1');
 $routes->post('obat/update/(:num)', 'ObatController::update/$1');
 $routes->get('obat/delete/(:num)', 'ObatController::delete/$1');
 
-//
+//Transaksi
 $routes->get('transaksi/create', 'TransaksiController::create');

@@ -29,6 +29,7 @@
               <!-- form start -->
               <form action="<?= base_url('obat/update/'.$obat['kdobat']) ?>" method="POST">
                 <div class="card-body">
+              
                   <div class="form-group">
                     <label>Nama Obat</label>
                     <input type="text" name="nmobat" class="form-control" id="InputKategori" placeholder="Unit Obat" value="<?= $obat['nmobat'] ?>" required>

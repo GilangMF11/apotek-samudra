@@ -38,7 +38,7 @@
                 <table id="example2" class="table table-bordered table-hover">
                     <thead>
                         <tr class="text-center">
-                            <th>Nomor Urut</th>
+                            <th style="width: 20px;">No</th>
                             <th>Penyimpanan</th>
                             <th>Aksi</th>
                         </tr>
@@ -47,7 +47,7 @@
                         <?php $counter = 1; // Inisialisasi counter ?>
                         <?php foreach($rak as $u) : ?>
                             <tr>
-                                <td><?= $counter++ ?></td>
+                                <td class="text-center"><?= $counter++ ?></td>
                                 <td><?= $u['nmrak'] ?></td>
                                 <td class="text-center">
                                     <a href="<?= base_url('rak/edit/' . $u['id_rak']) ?>" class="btn btn-warning">Edit</a>

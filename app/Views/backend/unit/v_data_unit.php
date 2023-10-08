@@ -38,7 +38,7 @@
                 <table id="example2" class="table table-bordered table-hover">
                     <thead>
                         <tr class="text-center">
-                            <th>Nomor Urut</th>
+                            <th style="width: 20px;">No</th>
                             <th>Unit</th>
                             <th>Aksi</th>
                         </tr>

@@ -9,7 +9,7 @@ class RakController extends BaseController
     public function index()
     {
         $rakModel = new \App\Models\RakModel();
-        $data['rak'] = $rakModel->findAll();
+        $data['rak'] = $rakModel->orderBy('nmrak', 'ASC')->findAll();
         
         return view('backend/rak/v_data_rak', $data);
     }

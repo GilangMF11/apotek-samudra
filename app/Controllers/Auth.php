@@ -16,11 +16,20 @@ class Auth extends BaseController
 
     public function index () 
     {
-        return view('auth/v_login');
+        $userId = session()->get('user_id');
+
+        if ($userId) {
+            // Pengguna sudah login, arahkan ke halaman dashboard
+            return redirect()->to('/dashboard');
+        } else {
+            // Pengguna belum login, tampilkan halaman login
+            return view('auth/v_login');
+        }
     }
 
     public function login()
     {
+        
         // Validasi form login
         $validation = \Config\Services::validation();
         $validationRules = [
@@ -47,6 +56,10 @@ class Auth extends BaseController
                 // Set session atau token auth sesuai kebutuhan
                 // Redirect ke halaman dashboard atau halaman setelah login sukses
                 return redirect()->to('/dashboard');
+                // Contoh: set session user_id
+                session()->set('user_id', $user['id']);
+                // Set session role
+                session()->set('role', $user['role']);
             } else {
                 // Jika password salah, kembalikan ke halaman login dengan pesan error
                 return view('auth/v_login', ['validation' => $validation, 'error' => 'Password salah']);

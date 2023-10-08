@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="<?= base_url()?>/dashboard">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<?= site_url('dashboard') ?>">Home</a></li>
                         <li class="breadcrumb-item active">Transaksi</li>
                     </ol>
                 </div>
@@ -39,7 +39,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="">Tanggal Transaksi</label>
-                                        <input type="date" name="tgltransaksi" id="" class="form-control" required>
+                                        <input type="date" name="tgltransaksi" class="form-control" required>
                                     </div>
                                 </div>
                                 <table id="transaksiTable" class="table table-bordered table-hover">
@@ -50,28 +50,27 @@
                                             <th>Unit Obat</th>
                                             <th>Harga Satuan</th>
                                             <th>Banyak</th>
-                                            <th>Sub Total</th>
+                                            <th style="width: 200px;">Sub Total</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td style="width: 250px;">
-                                            <select name="kdobat[]" id="kdobat_0" class="form-control text-center" required>
-                                                <?php foreach ($obat as $obat) : ?>
-                                                    <option value="<?= $obat['kdobat'] ?>"><?= $obat['nmobat'] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-
+                                                <select name="kdobat[]" id="kdobat_0" class="form-control text-center" required>
+                                                    <?php foreach ($obat as $obat_item) : ?>
+                                                        <option value="<?= $obat_item['kdobat'] ?>"><?= $obat_item['nmobat'] ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control text-center" name="qty[]" id="qty_0" value="<?= $obat['qty'] ?>" readonly>
+                                                <input type="text" class="form-control text-center" name="qty[]" id="qty_0" value="" readonly>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control text-center" name="unit[]" id="unit_0" value="<?= $obat['unit'] ?>" readonly>
+                                                <input type="text" class="form-control text-center" name="unit[]" id="unit_0" value="" readonly>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control text-center" name="harga[]" id="harga_0" value="<?= $obat['hrgjual'] ;?>" readonly>
+                                                <input type="text" class="form-control text-center" name="harga[]" id="harga_0" value="" readonly>
                                             </td>
                                             <td>
                                                 <input type="text" class="form-control text-center" name="banyak[]" id="banyak_0" >
@@ -84,12 +83,38 @@
                                             </td>
                                         </tr>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="5" class="fw-bold text-end">
+                                                <h5 class="text-center">Total</h5>
+                                            </td>
+                                            <td colspan="2">
+                                                <input type="text" class="form-control" name="total" id="total">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5" class="fw-bold text-end">
+                                                <h5 class="text-center">Bayar</h5>
+                                            </td>
+                                            <td colspan="2">
+                                                <input type="text" class="form-control" name="bayar" id="bayar">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5" class="fw-bold text-end">
+                                                <h5 class="text-center">Kembali</h5>
+                                            </td>
+                                            <td colspan="2">
+                                                <input type="text" class="form-control" name="kembali" id="kembali">
+                                            </td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div><!-- /.card-body -->
-                            <div class="card-footer text-center">
-                                <a href="<?= base_url()?>dashboard"><button type="button" class="btn btn-danger">Batal</button></a>
+                            <div class="card-footer text-center" style="position: sticky;">
+                                <a href="<?= site_url('dashboard') ?>"><button type="button" class="btn btn-danger">Batal</button></a>
                                 <button type="button" class="btn btn-primary" id="addRow">+ Tambah Transaksi</button>
-                                <a href="<?= base_url()?>transaksi/store"><button type="submit" class="btn btn-success">Simpan</button></a>
+                                <button type="submit" class="btn btn-success">Simpan</button>
                             </div>
                         </form>
                     </div><!-- /.card -->

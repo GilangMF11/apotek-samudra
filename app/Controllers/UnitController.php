@@ -9,7 +9,7 @@ class UnitController extends BaseController
     public function index()
     {
         $unitModel = new \App\Models\UnitModel();
-        $data['unit'] = $unitModel->findAll();
+        $data['unit'] = $unitModel->orderBy('nmunit', 'ASC')->findAll();
         
         return view('backend/unit/v_data_unit', $data);
     }

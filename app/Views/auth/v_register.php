@@ -24,6 +24,10 @@
     <div class="card-body">
       <p class="login-box-msg">Silahkan Register</p>
 
+      <?php if(isset($error)): ?>
+        <div class="alert alert-danger"><?= $error ?></div>
+      <?php endif; ?>
+
       <form action="register" method="POST">
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Username" id="username" name="username">

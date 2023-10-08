@@ -16,7 +16,7 @@ class UserController extends BaseController
     public function index()
     {
         $userModel = new \App\Models\UserModel();
-        $data['users'] = $userModel->findAll();
+        $data['users'] = $userModel->orderBy('username', 'ASC')->findAll();
 
 
         return view('backend/user/v_data_user', $data);
