@@ -1,6 +1,6 @@
-<?=$this->extend('layouts/v_wrapper')?>
+<?= $this->extend('layouts/v_wrapper') ?>
 
-<?=$this->section('content')?>
+<?= $this->section('content') ?>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -26,7 +26,7 @@
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-12">
-                    <!-- jquery Tambah Pengguna -->
+                    <!-- Form Tambah Transaksi -->
                     <div class="card card-primary">
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -64,16 +64,16 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control text-center" name="qty[]" id="qty_0" value="" readonly>
+                                                <input type="text" class="form-control text-center" name="qty[]" id="qty_0" value="<?= $obat_item['qty'] ?>" readonly>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control text-center" name="unit[]" id="unit_0" value="" readonly>
+                                                <input type="text" class="form-control text-center" name="unit[]" id="unit_0" value="<?= $obat_item['unit'] ?>" readonly>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control text-center" name="harga[]" id="harga_0" value="" readonly>
+                                                <input type="text" class="form-control text-center" name="harga[]" id="harga_0" value="<?= $obat_item['hrgjual'] ?>" readonly>
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control text-center" name="banyak[]" id="banyak_0" >
+                                                <input type="text" class="form-control text-center" name="banyak[]" id="banyak_0" oninput="hitungSubtotal(0)">
                                             </td>
                                             <td>
                                                 <input type="text" class="form-control text-center" name="subtotal[]" id="subtotal_0" readonly>
@@ -89,7 +89,7 @@
                                                 <h5 class="text-center">Total</h5>
                                             </td>
                                             <td colspan="2">
-                                                <input type="text" class="form-control" name="total" id="total">
+                                                <input type="text" class="form-control" name="total" id="total" readonly>
                                             </td>
                                         </tr>
                                         <tr>
@@ -97,7 +97,7 @@
                                                 <h5 class="text-center">Bayar</h5>
                                             </td>
                                             <td colspan="2">
-                                                <input type="text" class="form-control" name="bayar" id="bayar">
+                                                <input type="text" class="form-control" name="bayar" id="bayar" oninput="hitungKembali()">
                                             </td>
                                         </tr>
                                         <tr>
@@ -105,15 +105,15 @@
                                                 <h5 class="text-center">Kembali</h5>
                                             </td>
                                             <td colspan="2">
-                                                <input type="text" class="form-control" name="kembali" id="kembali">
+                                                <input type="text" class="form-control" name="kembali" id="kembali" readonly>
                                             </td>
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div><!-- /.card-body -->
-                            <div class="card-footer text-center" style="position: sticky;">
+                            <div id="btn-trans" class="card-footer text-center" style="position: sticky;">
                                 <a href="<?= site_url('dashboard') ?>"><button type="button" class="btn btn-danger">Batal</button></a>
-                                <button type="button" class="btn btn-primary" id="addRow">+ Tambah Transaksi</button>
+                                <button type="button" class="btn btn-primary" id="addRow">+ Tambah Produk</button>
                                 <button type="submit" class="btn btn-success">Simpan</button>
                             </div>
                         </form>
@@ -126,37 +126,48 @@
         </div><!-- /.container-fluid -->
     </section><!-- /.content -->
 </div>
-
+<style>
+    #btn-trans {
+        position: sticky;
+        bottom: 0;
+        z-index: 1000; /* Sesuaikan dengan kebutuhan Anda */
+        background-color: #fff; /* Sesuaikan dengan warna latar belakang yang Anda inginkan */
+        padding: 10px 0;
+    }
+</style>
 <!-- Tambahkan script ini di bawah konten HTML Anda -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         // Mendefinisikan ID baris terakhir yang ditambahkan
         let lastRowID = 0;
 
-        // Menambahkan baris baru saat tombol "+ Tambah Transaksi" ditekan
+        // Menambahkan baris baru saat tombol "+ Tambah Produk" ditekan
         $('#addRow').on('click', function() {
             lastRowID++; // Increment ID
             let newRow = `
                 <tr>
-                    <td>
-                        <select name="kdobat[]" id="kdobat_${lastRowID}" class="form-control">
-                            <option></option>
+                    <td style="width: 250px;">
+                        <select name="kdobat[]" id="kdobat_${lastRowID}" class="form-control text-center" required>
+                            <?php foreach ($obat as $obat_item) : ?>
+                                <option value="<?= $obat_item['kdobat'] ?>"><?= $obat_item['nmobat'] ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="qty[]" id="qty_${lastRowID}" readonly>
+                        <input type="text" class="form-control text-center" name="qty[]" id="qty_${lastRowID}" value="<?= $obat_item['qty'] ?>" readonly>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="unit[]" id="unit_${lastRowID}" readonly>
+                        <input type="text" class="form-control text-center" name="unit[]" id="unit_${lastRowID}" value="<?= $obat_item['unit'] ?>" readonly>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="harga[]" id="harga_${lastRowID}" readonly>
+                        <input type="text" class="form-control text-center" name="harga[]" id="harga_${lastRowID}" value="<?= $obat_item['hrgjual'] ?>" readonly>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="banyak[]" id="banyak_${lastRowID}" readonly>
+                        <input type="text" class="form-control text-center" name="banyak[]" id="banyak_${lastRowID}" oninput="hitungSubtotal(${lastRowID})">
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="subtotal[]" id="subtotal_${lastRowID}" readonly>
+                        <input type="text" class="form-control text-center" name="subtotal[]" id="subtotal_${lastRowID}" readonly>
                     </td>
                     <td>
                         <button type="button" class="btn btn-danger remove-row">Hapus</button>
@@ -170,7 +181,45 @@
         $('#transaksiTable').on('click', '.remove-row', function() {
             $(this).closest('tr').remove();
         });
+
+        // Fungsi untuk menghitung subtotal
+        function hitungSubtotal(rowID) {
+            let banyak = parseInt($('#banyak_' + rowID).val()) || 0;
+            let harga = parseInt($('#harga_' + rowID).val()) || 0;
+            let subtotal = banyak * harga;
+            $('#subtotal_' + rowID).val(subtotal);
+            hitungTotal();
+        }
+
+        // Fungsi untuk menghitung total
+        function hitungTotal() {
+            let total = 0;
+            $('input[name^="subtotal"]').each(function() {
+                total += parseFloat($(this).val()) || 0;
+            });
+            $('#total').val(total);
+            hitungKembali();
+        }
+
+        // Fungsi untuk menghitung kembali
+        function hitungKembali() {
+            let total = parseFloat($('#total').val()) || 0;
+            let bayar = parseFloat($('#bayar').val()) || 0;
+            let kembali = bayar - total;
+            $('#kembali').val(kembali);
+        }
+
+        // Panggil fungsi hitungTotal saat input banyak berubah
+        $('#transaksiTable').on('input', 'input[name^="banyak"]', function() {
+            let rowID = $(this).closest('tr').index();
+            hitungSubtotal(rowID);
+        });
+
+        // Panggil fungsi hitungKembali saat input bayar berubah
+        $('#bayar').on('input', function() {
+            hitungKembali();
+        });
     });
 </script>
 
-<?=$this->endSection()?>
+<?= $this->endSection() ?>
