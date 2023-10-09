@@ -48,4 +48,49 @@
       </div><!-- /.container-fluid -->
     </section><!-- /.content -->
   </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+      $(document).ready(function() {
+          // Submit form ketika tombol Submit ditekan
+          $('form').submit(function(event) {
+              event.preventDefault(); // Mencegah form untuk melakukan submit standar
+              $.ajax({
+                  url: '<?= base_url('rak/store') ?>', // Ganti URL sesuai dengan endpoint penyimpanan Anda
+                  type: 'POST',
+                  data: $('form').serialize(),
+                  dataType: 'json',
+                  success: function(response) {
+                      if (response.success) {
+                          // Jika penyimpanan berhasil, tampilkan SweetAlert2
+                          Swal.fire(
+                              'Data Berhasil Tersimpan',
+                              '',
+                              'success'
+                          ).then(function() {
+                              // Redirect atau lakukan tindakan lain yang diperlukan
+                              window.location.href = '<?= base_url('rak') ?>'; // Ganti URL sesuai dengan halaman yang ingin Anda arahkan
+                          });
+                      } else {
+                          // Jika penyimpanan gagal, tampilkan pesan kesalahan
+                          Swal.fire(
+                              'Gagal',
+                              'Terjadi kesalahan saat menyimpan data.',
+                              'error'
+                          );
+                      }
+                  },
+                  error: function() {
+                      // Jika terjadi kesalahan saat mengirim permintaan ke server, tampilkan pesan kesalahan
+                      Swal.fire(
+                          'Gagal',
+                          'Terjadi kesalahan saat mengirim permintaan ke server.',
+                          'error'
+                      );
+                  }
+              });
+          });
+      });
+  </script>
+
 <?=$this->endSection()?>

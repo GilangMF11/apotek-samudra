@@ -51,7 +51,9 @@
                                 <td><?= $u['nmrak'] ?></td>
                                 <td class="text-center">
                                     <a href="<?= base_url('rak/edit/' . $u['id_rak']) ?>" class="btn btn-warning">Edit</a>
-                                    <a href="<?= base_url('rak/delete/' . $u['id_rak']) ?>" class="btn btn-danger">Hapus</a>
+                                    
+                                    <!-- Tambahkan tautan Hapus dengan JavaScript -->
+                                    <a href="#" class="btn btn-danger" onclick="hapusRak(<?= $u['id_rak'] ?>)">Hapus</a>
                                 </td>
                             </tr>
                         <?php endforeach ?>
@@ -71,4 +73,28 @@
     <!-- /.content -->
   </div>
 
-  <?=$this->endSection()?>
+  <!-- Tambahkan script SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Tambahkan script JavaScript untuk menampilkan SweetAlert2 -->
+  <script>
+      // Fungsi untuk menampilkan SweetAlert2 saat Hapus diklik
+      function hapusRak(idRak) {
+          Swal.fire({
+              title: 'Apakah Anda yakin?',
+              text: "Anda tidak akan dapat mengembalikan ini!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Ya, Hapus!'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  // Jika pengguna mengonfirmasi, maka arahkan ke tautan hapus di sini
+                  window.location.href = '<?= base_url('rak/delete/') ?>' + idRak;
+              }
+          });
+      }
+  </script>
+
+<?=$this->endSection()?>

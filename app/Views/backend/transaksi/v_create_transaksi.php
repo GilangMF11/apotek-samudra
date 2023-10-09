@@ -30,16 +30,19 @@
                     <div class="card card-primary">
                         <!-- /.card-header -->
                         <!-- form start -->
+                        
                         <form action="<?= base_url('transaksi/store') ?>" method="POST">
                             <div class="card-body">
+
+                            <div class="" id="jam"></div>
                                 <div style="width: 250px;">
                                     <div class="form-group">
                                         <label for="">Nama Pembeli</label>
-                                        <input type="text" name="nmpembeli" class="form-control" required>
+                                        <input type="text" name="nmpembeli" class="form-control" placeholder="UMUM">
                                     </div>
                                     <div class="form-group">
                                         <label for="">Tanggal Transaksi</label>
-                                        <input type="date" name="tgltransaksi" class="form-control" required>
+                                        <input type="date" name="tgltransaksi" id="tgltransaksi" class="form-control" required>
                                     </div>
                                 </div>
                                 <table id="transaksiTable" class="table table-bordered table-hover">
@@ -83,7 +86,7 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                    <tfoot>
+                                    <tfoot class="tfoot">
                                         <tr>
                                             <td colspan="5" class="fw-bold text-end">
                                                 <h5 class="text-center">Total</h5>
@@ -118,108 +121,133 @@
                             </div>
                         </form>
                     </div><!-- /.card -->
-                </div><!--/.col (left) -->
-                <!-- right column -->
-                <div class="col-md-6">
-                </div><!--/.col (right) -->
+
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </section><!-- /.content -->
 </div>
 <style>
+    .tfoot {
+        position: sticky;
+        bottom: 0;
+        z-index: 1000;
+        background-color: #fff;
+        padding: 10px 0;
+    }
     #btn-trans {
         position: sticky;
         bottom: 0;
-        z-index: 1000; /* Sesuaikan dengan kebutuhan Anda */
-        background-color: #fff; /* Sesuaikan dengan warna latar belakang yang Anda inginkan */
+        z-index: 1000;
+        background-color: #fff;
         padding: 10px 0;
+    }
+    #jam {
+        float: right;
+        font-size: large;
+        font-weight: bold;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 </style>
 <!-- Tambahkan script ini di bawah konten HTML Anda -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        // Mendefinisikan ID baris terakhir yang ditambahkan
-        let lastRowID = 0;
+    // Set nilai input tanggal transaksi ke tanggal hari ini
+    let today = new Date().toISOString().slice(0, 10);
+    $('#tgltransaksi').val(today);
 
-        // Menambahkan baris baru saat tombol "+ Tambah Produk" ditekan
-        $('#addRow').on('click', function() {
-            lastRowID++; // Increment ID
-            let newRow = `
-                <tr>
-                    <td style="width: 250px;">
-                        <select name="kdobat[]" id="kdobat_${lastRowID}" class="form-control text-center" required>
-                            <?php foreach ($obat as $obat_item) : ?>
-                                <option value="<?= $obat_item['kdobat'] ?>"><?= $obat_item['nmobat'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" class="form-control text-center" name="qty[]" id="qty_${lastRowID}" value="<?= $obat_item['qty'] ?>" readonly>
-                    </td>
-                    <td>
-                        <input type="text" class="form-control text-center" name="unit[]" id="unit_${lastRowID}" value="<?= $obat_item['unit'] ?>" readonly>
-                    </td>
-                    <td>
-                        <input type="text" class="form-control text-center" name="harga[]" id="harga_${lastRowID}" value="<?= $obat_item['hrgjual'] ?>" readonly>
-                    </td>
-                    <td>
-                        <input type="text" class="form-control text-center" name="banyak[]" id="banyak_${lastRowID}" oninput="hitungSubtotal(${lastRowID})">
-                    </td>
-                    <td>
-                        <input type="text" class="form-control text-center" name="subtotal[]" id="subtotal_${lastRowID}" readonly>
-                    </td>
-                    <td>
-                        <button type="button" class="btn btn-danger remove-row">Hapus</button>
-                    </td>
-                </tr>
-            `;
-            $('#transaksiTable tbody').append(newRow);
-        });
+    // Mendefinisikan ID baris terakhir yang ditambahkan
+    let lastRowID = 0;
 
-        // Menghapus baris saat tombol "Hapus" ditekan
-        $('#transaksiTable').on('click', '.remove-row', function() {
-            $(this).closest('tr').remove();
-        });
-
-        // Fungsi untuk menghitung subtotal
-        function hitungSubtotal(rowID) {
-            let banyak = parseInt($('#banyak_' + rowID).val()) || 0;
-            let harga = parseInt($('#harga_' + rowID).val()) || 0;
-            let subtotal = banyak * harga;
-            $('#subtotal_' + rowID).val(subtotal);
-            hitungTotal();
-        }
-
-        // Fungsi untuk menghitung total
-        function hitungTotal() {
-            let total = 0;
-            $('input[name^="subtotal"]').each(function() {
-                total += parseFloat($(this).val()) || 0;
-            });
-            $('#total').val(total);
-            hitungKembali();
-        }
-
-        // Fungsi untuk menghitung kembali
-        function hitungKembali() {
-            let total = parseFloat($('#total').val()) || 0;
-            let bayar = parseFloat($('#bayar').val()) || 0;
-            let kembali = bayar - total;
-            $('#kembali').val(kembali);
-        }
-
-        // Panggil fungsi hitungTotal saat input banyak berubah
-        $('#transaksiTable').on('input', 'input[name^="banyak"]', function() {
-            let rowID = $(this).closest('tr').index();
-            hitungSubtotal(rowID);
-        });
-
-        // Panggil fungsi hitungKembali saat input bayar berubah
-        $('#bayar').on('input', function() {
-            hitungKembali();
-        });
+    // Menambahkan baris baru saat tombol "+ Tambah Produk" ditekan
+    $('#addRow').on('click', function() {
+        lastRowID++;
+        let newRow = `
+            <tr>
+                <td style="width: 250px;">
+                    <select name="kdobat[]" id="kdobat_${lastRowID}" class="form-control text-center" required>
+                        <?php foreach ($obat as $obat_item) : ?>
+                            <option value="<?= $obat_item['kdobat'] ?>"><?= $obat_item['nmobat'] ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" class="form-control text-center" name="qty[]" id="qty_${lastRowID}" value="<?= $obat_item['qty'] ?>" readonly>
+                </td>
+                <td>
+                    <input type="text" class="form-control text-center" name="unit[]" id="unit_${lastRowID}" value="<?= $obat_item['unit'] ?>" readonly>
+                </td>
+                <td>
+                    <input type="text" class="form-control text-center" name="harga[]" id="harga_${lastRowID}" value="<?= $obat_item['hrgjual'] ?>" readonly>
+                </td>
+                <td>
+                    <input type="text" class="form-control text-center" name="banyak[]" id="banyak_${lastRowID}" oninput="hitungSubtotal(${lastRowID})">
+                </td>
+                <td>
+                    <input type="text" class="form-control text-center" name="subtotal[]" id="subtotal_${lastRowID}" readonly>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-danger remove-row">Hapus</button>
+                </td>
+            </tr>
+        `;
+        $('#transaksiTable tbody').append(newRow);
     });
+
+    // Menghapus baris saat tombol "Hapus" ditekan
+    $('#transaksiTable').on('click', '.remove-row', function() {
+        $(this).closest('tr').remove();
+        hitungTotal();
+    });
+
+    // Fungsi untuk menghitung subtotal
+    function hitungSubtotal(rowID) {
+        let banyak = parseInt($('#banyak_' + rowID).val()) || 0;
+        let harga = parseInt($('#harga_' + rowID).val()) || 0;
+        let subtotal = banyak * harga;
+        $('#subtotal_' + rowID).val(subtotal);
+        hitungTotal();
+    }
+
+    // Fungsi untuk menghitung total
+    function hitungTotal() {
+        let total = 0;
+        $('input[name^="subtotal"]').each(function() {
+            total += parseFloat($(this).val()) || 0;
+        });
+        $('#total').val(total);
+        hitungKembali();
+    }
+
+    // Fungsi untuk menghitung kembali
+    function hitungKembali() {
+        let total = parseFloat($('#total').val()) || 0;
+        let bayar = parseFloat($('#bayar').val()) || 0;
+        let kembali = bayar - total;
+        $('#kembali').val(kembali);
+    }
+
+    // Panggil fungsi hitungTotal saat input banyak berubah
+    $('#transaksiTable').on('input', 'input[name^="banyak"]', function() {
+        let rowID = $(this).closest('tr').index();
+        hitungSubtotal(rowID);
+    });
+
+    // Panggil fungsi hitungKembali saat input bayar berubah
+    $('#bayar').on('input', function() {
+        hitungKembali();
+    });
+
+    // Tampilkan jam aktual
+    function updateClock() {
+        const now = new Date();
+        const jam = now.getHours().toString().padStart(2, '0');
+        const menit = now.getMinutes().toString().padStart(2, '0');
+        const detik = now.getSeconds().toString().padStart(2, '0');
+        const waktu = jam + ':' + menit + ':' + detik;
+        $('#jam').text(waktu);
+    }
+
+    setInterval(updateClock, 1000); // Perbarui setiap 1 detik
 </script>
 
 <?= $this->endSection() ?>

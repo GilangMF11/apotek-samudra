@@ -25,6 +25,9 @@
   <link rel="stylesheet" href="<?= base_url() ?>template/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= base_url() ?>template/dist/css/adminlte.min.css">
+  <!-- Tambahkan ini ke dalam bagian head HTML Anda -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
+
 </head>
 <!--
 `body` tag options:
@@ -86,6 +89,9 @@
 <script src="<?php echo base_url()?>template/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url()?>template/dist/js/adminlte.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Page specific script -->
 <script>
   $(function () {
