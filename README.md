@@ -25,6 +25,17 @@ to your `app` folder. The affected files can be copied or merged from
 
 ## Setup
 
+1. Clonning Project `git clone`
+2. `composer update`
+3. Setting Database `App/Config/Database.php`
+4. `php spark migrate`
+5. `php spark db:seed UserSeeder`
+6. Running project `php spark serve`
+
+   Login
+
+   Username : admin
+   Password : admin123 
 Copy `env` to `.env` and tailor for your app, specifically the baseURL
 and any database settings.
 
