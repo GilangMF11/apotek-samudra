@@ -11,13 +11,13 @@ class Transaksi extends Migration
         $this->forge->addField([
             'id_transaksi' => [
                 'type' => 'VARCHAR',
-                'constraint' => 255,
+                'constraint' => 50,
             ],
             'nmcustomer' => [
                 'type' => 'VARCHAR',
                 'constraint' => 50,
             ],
-            'tanggal_transaksi' => [
+            'tgltransaksi' => [
                 'type' => 'DATE',
             ],
             'kdobat' => [
@@ -36,6 +36,10 @@ class Transaksi extends Migration
                 'type' => 'DECIMAL',
                 'constraint' => '10,2',
             ],
+            'nmkasir' => [
+                'type' => 'VARCHAR',
+                'constraint' => '50'
+            ]
         ]);
         $this->forge->addKey('id', true);
         $this->forge->createTable('tbtransaksi');

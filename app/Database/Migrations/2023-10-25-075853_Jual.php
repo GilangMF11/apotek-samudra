@@ -4,26 +4,33 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Obat extends Migration
+class Jual extends Migration
 {
     public function up()
     {
         $this->forge->addField([
-            'kdobat' => [
-                'type'           => 'VARCHAR',
-                'constraint'     => 12,
-            ],
-            'nmobat' => [
-                'type'       => 'VARCHAR',
-                'constraint' => '50',
-            ],
-            'kdbatch'=> [
-                'type'       => 'VARCHAR',
-                'constraint' => '50',
-            ],
-            'rak' => [
+            'id_transaksijual' => [
                 'type' => 'VARCHAR',
-                'constraint' => '20',
+                'constraint' => 20,
+            ],
+            'tgltrans' => [
+                'type' => 'DATE',
+            ],
+            'kdobat' => [
+                'type'       => 'VARCHAR',
+                'constraint' => '50',
+            ],
+            'kdbatch' => [
+                'type'  => 'VARCHAR',
+                'constraint' => '50',
+                'null' => TRUE
+            ],
+            'tglproduksi' => [
+                'type' => 'DATE',
+                'null' => TRUE,
+            ],
+            'tglexp' => [
+                'type' => 'DATE'
             ],
             'unit' => [
                 'type' => 'VARCHAR',
@@ -37,6 +44,10 @@ class Obat extends Migration
                 'type' => 'TEXT',
                 'null' => true,
             ],
+            'qty' => [
+                'type' => 'INTEGER',
+                'constraint' => '12'
+            ],
             'hrgbeli' => [
                 'type' => 'DOUBLE',
                 'constraint' => '10,2',
@@ -49,13 +60,14 @@ class Obat extends Migration
                 'type' => 'VARCHAR',
                 'constraint' => '50',
             ]
+
         ]);
-        $this->forge->addKey('kdobat', true);
-        $this->forge->createTable('tbobat');
+        $this->forge->addKey('id_transaksi jual', true);
+        $this->forge->createTable('tbjual');
     }
 
     public function down()
     {
-        $this->forge->dropTable('tbobat');
+        $this->forge->dropTable('tbjual');
     }
 }

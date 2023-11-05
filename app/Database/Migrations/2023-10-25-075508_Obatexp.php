@@ -4,7 +4,7 @@ namespace App\Database\Migrations;
 
 use CodeIgniter\Database\Migration;
 
-class Obat extends Migration
+class Obatexp extends Migration
 {
     public function up()
     {
@@ -51,11 +51,11 @@ class Obat extends Migration
             ]
         ]);
         $this->forge->addKey('kdobat', true);
-        $this->forge->createTable('tbobat');
+        $this->forge->createTable('tbobatexp');
     }
 
     public function down()
     {
-        $this->forge->dropTable('tbobat');
+        $this->forge->dropTable('tbobatexp');
     }
 }

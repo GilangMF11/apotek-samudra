@@ -16,7 +16,7 @@ class Detailtransaksi extends Migration
             ],
             'id_transaksi' => [
                 'type' => 'INT',
-                'constraint' => 12,
+                'constraint' => 50,
             ],
             'kdobat' => [
                 'type' => 'INT',

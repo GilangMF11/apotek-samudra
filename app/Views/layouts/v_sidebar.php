@@ -248,6 +248,18 @@
                   <p>Stok Obat</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Obat Akan Kadaluarsa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="#" class="nav-item">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Obat Kadaluarsa</p>
+                </a>
+              </li>
             </ul>
           </li>
 
